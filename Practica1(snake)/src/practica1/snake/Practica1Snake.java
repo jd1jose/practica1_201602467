@@ -18,13 +18,15 @@ public class Practica1Snake {
     static int frutopoint=0;
     static Scanner opcion =new Scanner(System.in);
     static int contadorp=0;
+    static String[] bitacora=new String[5];
+    static int contadorbi=-1;
     
     public static void main(String[] args) {
     
             Menu(); 
     }
     public static void limpiar(){
-        int lineas=100;
+        int lineas=10;
         for (int i=0; i < lineas; i++)
         {
             System.out.println();
@@ -32,7 +34,8 @@ public class Practica1Snake {
     }
     
     public static void Menu(){   
-            int opmenu=0;
+        try{   
+        int opmenu=0;
             System.out.println("\033[34m +++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("\033[34m +            Bienvenido al Juego de Snake               +");
             System.out.println("\033[34m +++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -64,13 +67,16 @@ public class Practica1Snake {
                    
                    System.out.println("adios");
                    System.out.close();
-                 
-               break;
-               
-               default: 
+                   System.out.close();
+                break;
+                default: 
                    System.out.println("Escriba una opcion valida ");
-
            }
+        }
+                
+        catch(Exception e){
+            System.out.println("Ingreso un dato incorrecto vuelva a reinicial el programa");
+        }
     }
     public static void DatosAlumno(){
         
@@ -116,15 +122,20 @@ public class Practica1Snake {
            
     }
     public static void InicioJuego(){
+      
+        for(int i=0;i<bitacora.length;i++){
+            bitacora[i]="";
+        }
+        contadorbi=-1;
         Scanner entrada= new Scanner(System.in);
-        System.out.println("Ingrese nombre de usuario");
+        System.out.println("\033[33mIngrese nombre de usuario");
         usuario=entrada.next();
-        System.out.println("Tamaño de su tablero, ser mayor a 10x10 porfavor :)");
-        System.out.println("Tamaño en x");
+        System.out.println("\033[33mTamaño de su tablero, ser mayor a 10x10 porfavor :)");
+        System.out.println("\033[33mTamaño en x");
         tamañox=entrada.nextInt();
-        System.out.println("Tamaño en y");
+        System.out.println("\033[33mTamaño en y");
         tamañoy=entrada.nextInt();
-        System.out.println("Tamaño de la Snake inicial");
+        System.out.println("\033[33mTamaño de la Snake inicial");
       
         tamañosnake=entrada.nextInt();
         
@@ -139,9 +150,9 @@ public class Practica1Snake {
         
          Imprimirinicio();
          String paso =" ";  
-        System.out.println("Presione cualquiera de estas teclas para empezar el juego");
-        System.out.println("Presione a para ir al lado izquierdo, d para ir a lado derecho");
-        System.out.println("Presione w para ir arriba y s para ir  abajo");
+        System.out.println("\033[31mPresione cualquiera de estas teclas para empezar el juego");
+        System.out.println("\033[31mPresione a para ir al lado izquierdo, d para ir a lado derecho");
+        System.out.println("\033[31mPresione w para ir arriba y s para ir  abajo");
         Scanner mov=new Scanner(System.in);
        
         try{
@@ -436,10 +447,10 @@ public class Practica1Snake {
                             matrizD[i][j]=" ";
                             break;
                         case 1:
-                            matrizD[i][j]="\033[34m *";
+                            matrizD[i][j]="\033[32m *";
                             break;
                         case 2:
-                            matrizD[i][j]="\033[33m (´)";
+                            matrizD[i][j]="\033[31m (´)";
                             break;
                         default:
                             break;
@@ -450,35 +461,42 @@ public class Practica1Snake {
             } 
             //for de impresion
             System.out.println();System.out.println();
-            System.out.println("Puntos: "+record+"             Jugador: "+usuario);
+            System.out.println("\033[33mPuntos: "+record+"             Jugador: "+usuario);
             System.out.println();
             for(int i=0;i<matrizD.length+1;i++){
-                System.out.print("\033[36m @\t");
+                System.out.print("\033[35m @\t");
                 
             }
             System.out.println();
         for (String[] matrizD1 : matrizD) {
-            System.out.print("\033[36m @\t");
+            System.out.print("\033[35m @\t");
             for (int j = 0; j < matrizD1.length; j++) {
                 System.out.print(matrizD1[j]);
                 if (j != matrizD1.length - 1) {
                     System.out.print("\t");
                 }
             }
-            System.out.println("\033[36m @\t");
+            System.out.println("\033[35m @\t");
         }      
             for(int i=0;i<matrizD.length+1;i++){
-                System.out.print("\033[36m @\t");
+                System.out.print("\033[35m @\t");
                 
             }
             System.out.println();
             for(int i=0;i<matrizjuego.length;i++){
                 for(int j=0; j<matrizjuego[i].length;j++){
                     if(matrizjuego[i][j]==2)
-                   System.out.println("Fruto en la posicion: "+i+","+j+" y su valor es "+frutopoint);
+                   System.out.println("\033[33mFruto en la posicion: "+i+","+j+" y su valor es "+frutopoint);
                 }
             }
-    
+        System.out.println();
+        System.out.println();
+          for(int i=0;i<bitacora.length;i++){
+                
+                if(bitacora[i]!=null){
+                System.out.println(bitacora[i]);
+                }
+              }
     
     
     }
@@ -519,10 +537,10 @@ public class Practica1Snake {
                             matrizD[i][j]=" ";
                             break;
                         case 1:
-                            matrizD[i][j]="\033[35m *";
+                            matrizD[i][j]="\033[32m *";
                             break;
                         case 2:
-                            matrizD[i][j]="\033[33m (´)";
+                            matrizD[i][j]="\033[31m (´)";
                             break;
                         default:
                             break;
@@ -533,39 +551,39 @@ public class Practica1Snake {
             } 
             //for de impresion
             System.out.println();System.out.println();
-            System.out.println("Puntos: "+record+"             Jugador: "+usuario);
+            System.out.println("\033[33mPuntos: "+record+"             Jugador: "+usuario);
             System.out.println();
             for(int i=0;i<matrizD.length+1;i++){
-                System.out.print("\033[36m @\t");
+                System.out.print("\033[35m @\t");
                 
             }
             System.out.println();
         for (String[] matrizD1 : matrizD) {
-            System.out.print("\033[36m @\t");
+            System.out.print("\033[35m @\t");
             for (int j = 0; j < matrizD1.length; j++) {
                 System.out.print(matrizD1[j]);
                 if (j != matrizD1.length - 1) {
                     System.out.print("\t");
                 }
             }
-            System.out.println("\033[36m @\t");
+            System.out.println("\033[35m @\t");
         }      
             for(int i=0;i<matrizD.length+1;i++){
-                System.out.print("\033[36m @\t");
+                System.out.print("\033[35m @\t");
                 
             }
             System.out.println();
             for(int i=0;i<matrizjuego.length;i++){
                 for(int j=0; j<matrizjuego[i].length;j++){
                     if(matrizjuego[i][j]==2)
-                    System.out.println("Fruto en la posicion: "+i+","+j+" y su valor es "+frutopoint);
+                    System.out.println("\033[33mFruto en la posicion: "+i+","+j+" y su valor es "+frutopoint);
                 }
             }
     }
     public static void Random(){
         
         Random  fruto= new  Random();
-        
+      
       int encontrado=0;
        int x=0;
        int y=0; 
@@ -576,31 +594,42 @@ public class Practica1Snake {
             
             if (matrizjuego[x][y]==0)
             {
+             
                 matrizjuego[x][y]=2;
                 encontrado=1;
+                contadorbi++;
+          
             }
         }
       if(x<y){
-      frutopoint= Math.abs(tamañox/2 - x) ;
+      frutopoint= Math.abs(tamañoy/2 - x) ;
       
       
       }
       else if(y<x){
-      frutopoint= Math.abs(tamañoy/2 - y) ;
+      frutopoint= Math.abs(tamañox/2 - y) ;
       }
       else{
-      frutopoint= Math.abs(tamañox/2 - x) ;
+      frutopoint= Math.abs(tamañoy/2 - x) ;
       
       }
+      if(contadorbi<5){
+          
+      bitacora[contadorbi]="Posicion("+Integer.toString(x)+","+Integer.toString(y)+") Valor del fruto"+Integer.toString(frutopoint);
+     
+      }
+      else{
+          contadorbi=0; bitacora[contadorbi]="Posicion("+Integer.toString(x)+","+Integer.toString(y)+") Valor del fruto"+Integer.toString(frutopoint); }
      }
     catch (Exception e) {
-            System.out.println("error en el x "+x+" o error en el y "+y);
+       
             Random();
     }
         
     }
     public static void Historial(){
-            try{
+            limpiar();
+        try{
             String historial="";
             String [] mostrarhistorial;
             String user, puntos,tablero,snake="";
